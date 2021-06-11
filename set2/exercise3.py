@@ -7,7 +7,10 @@ def is_odd(a_number):
 
     Look into modulo division using the '%' operator as one way of doing this.
     """
-    return None
+    if a_number % 2 == 0:
+        return False
+    else:
+        return True
 
 
 def fix_it(moves=True, should_move=True):
@@ -22,9 +25,15 @@ def fix_it(moves=True, should_move=True):
     "Duct Tape"
     "No Problem"
 
-    Most people write this function with 4 return statements. 
+    Most people write this function with 4 return statements.
     As an extra challenge, see if you can get that down to three.
     """
+    if moves and not should_move:
+        return "Duct Tape"
+    elif not moves and should_move:
+        return "WD-40"
+    else:
+        return "No Problem"
     return None
 
 
@@ -35,7 +44,11 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    return None
+    list1 = []
+    for i in range(10):
+        list1.append("*")
+
+    return list1
 
 
 def loops_1c(number_of_items=5, symbol="#"):
@@ -45,7 +58,11 @@ def loops_1c(number_of_items=5, symbol="#"):
     string with exacly one symbol in it.
     E.g.: ['#', '#', '#', '#', '#']
     """
-    return None
+    list2 = []
+    for i in range(number_of_items):
+        list2.append(symbol)
+
+    return list2
 
 
 def loops_2():
@@ -66,7 +83,14 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    return None
+    list1 = []
+    List2 = []
+    for i in range(10):
+        list1.append("*")
+    for j in range(10):
+        List2.append(list1)
+
+    return List2
 
 
 def loops_3():
