@@ -245,11 +245,13 @@ def loops_7():
     for i in range(5):
         column = []
         for j in range(9):
-            column.append("x")
-        for j in range((5 - i) + 1):
-            column.append("*")
+            if j < 5 + i and j > 3 - i:
+                column.append("*")
+            else:
+                column.append(" ")
+        row.append(column)
 
-    return column
+    return row
 
 
 def little_printer(some_kind_of_list, exercise_name):
