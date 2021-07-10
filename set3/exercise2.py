@@ -24,7 +24,9 @@ def exampleGuessingGame():
 
     while not guessed:
         guessedNumber = int(input("Guess a number: "))
-        print("You guessed {},".format(guessedNumber),)
+        print(
+            "You guessed {},".format(guessedNumber),
+        )
         if guessedNumber == actualNumber:
             print("You got it!! It was {}".format(actualNumber))
             guessed = True
@@ -32,6 +34,7 @@ def exampleGuessingGame():
             print("Too small, try again :'(")
         else:
             print("Too big, try again :'(")
+
     return "You got it!"
 
 

@@ -9,10 +9,15 @@ def loop_ranger(start, stop=None, step=1):
     """Return a list of numbers between start and stop in steps of step.
 
     Do this using any method apart from JUST using range() #TODO: clarify this wording
-    The look up the docs for range(), you can answer this with just the range 
+    The look up the docs for range(), you can answer this with just the range
     function, but we'd like you to do it the long way, probably using a loop.
     """
-    return None
+    new_list = []
+
+    for i in range(start, stop, step):
+        new_list.append(i)
+
+    return new_list
 
 
 def lone_ranger(start, stop, step):
@@ -20,16 +25,26 @@ def lone_ranger(start, stop, step):
 
     Look up the docs for range() and wrap it in a 1:1 way
     """
-    return None
+    new_list = []
+
+    for i in range(start, stop, step):
+        new_list.append(i)
+
+    return new_list
 
 
-def two_step_ranger(start, stop):
+def two_step_ranger(start, stop, step=2):
     """Make a range that steps by 2.
 
     Sometimes you want to hide complexity.
     Make a range function that always has a step size of 2
     """
-    return None
+    new_list = []
+
+    for i in range(start, stop, step):
+        new_list.append(i)
+
+    return new_list
 
 
 def stubborn_asker(low, high):
@@ -40,17 +55,33 @@ def stubborn_asker(low, high):
 
     Look up the docs for input
     """
-    return None
+    message = f"give me a number between {low}, and {high}: "
+
+    while True:
+        input_number = int(input(message))
+        if low < input_number < high:
+            print(f"Nice! {input_number} looks good")
+            return input_number
+        else:
+            print(f"{input_number} isn't between {low}, and {high}")
 
 
 def not_number_rejector(message):
     """Ask for a number repeatedly until actually given one.
 
-    Ask for a number, and if the response is actually NOT a number 
+    Ask for a number, and if the response is actually NOT a number
     (e.g. "cow", "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
     """
-    return None
+    message = "give me a number please: "
+
+    while True:
+        try:
+            attempt = input(message)
+            input_number = int(attempt)
+            return input_number
+        except:
+            print("that wasn't a number")
 
 
 def super_asker(low, high):
@@ -61,7 +92,20 @@ def super_asker(low, high):
     Try to call at least one of the other functions to minimise the
     amount of code.
     """
-    return None
+    message = f"give me a number between {low}, and {high}: "
+
+    while True:
+        try:
+            attempt = input(message)
+            input_number = int(attempt)
+            if low < input_number < high:
+                print(f"Nice! {input_number} looks good")
+                return input_number
+            else:
+                print(f"{input_number} isn't between {low}, and {high}")
+
+        except:
+            print("that wasn't a number")
 
 
 if __name__ == "__main__":
