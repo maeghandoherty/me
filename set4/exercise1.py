@@ -35,6 +35,19 @@ def get_some_details():
     """
     json_data = open(LOCAL + "/lazyduck.json").read()
 
+    with open(LOCAL + "/lazycduck.json", "r", encoding="utf-8") as f:
+        json_data = f.read()
+    # json_data = open(LOCAL + "/lazyduck.json").read()
+
+    data = json.loads(json_data)
+
+    last = data["results"][0]["name"]["last"]
+    password = data["results"][0]["Login"]["password"]
+    postcode = data["results"][0]["location"]["postcode"]
+    id = int(data["results"][0]["id"]["value"])
+
+    return {"lastName": last, "password": password, "postcpdePlusID": postcode + id}
+
     data = json.loads(json_data)
     return {"lastName": None, "password": None, "postcodePlusID": None}
 
@@ -73,17 +86,33 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. &wordlength=
     """
+    pyramid = []
+    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={}"
+
+    # value at the end of URL determines the word lenfth - needs to be formatted to change its calue in the loop
+
+    for i in range(2, 21, 2):
+        r = requests.get(url.format(i))
+        first_half = r.text
+        pyramid.append(first_half)
+
+    for i in range(20, 3, -2):
+        r = requests.get(url.format(i))
+        second_half = r.text
+        pyramid.append(second_half)
+
+    return pyramid
     pass
 
 
 def pokedex(low=1, high=5):
-    """ Return the name, height and weight of the tallest pokemon in the range low to high.
+    """Return the name, height and weight of the tallest pokemon in the range low to high.
 
     Low and high are the range of pokemon ids to search between.
     Using the Pokemon API: https://pokeapi.co get some JSON using the request library
     (a working example is filled in below).
     Parse the json and extract the values needed.
-    
+
     TIP: reading json can someimes be a bit confusing. Use a tool like
          http://www.jsoneditoronline.org/ to help you see what's going on.
     TIP: these long json accessors base["thing"]["otherThing"] and so on, can
@@ -91,6 +120,26 @@ def pokedex(low=1, high=5):
          variable and then future access will be easier.
     """
     template = "https://pokeapi.co/api/v2/pokemon/{id}"
+    some_pokemon = []
+    for p in range(low, high):
+        url = template.format(id=p)
+        r = requests.get(url)
+        if r.status_code is 200:
+            the_json = json.loads(r.text)
+            some_pokemon.append(the_json)
+
+    height_of_tallest_pokemon = 0
+    tallest_pokemon = "🦙🦔🦕"
+    for p in some_pokemon:
+        height = p["height"]
+        if height > height_of_tallest_pokemon:
+            height_of_tallest_pokemon = height
+            tallest_pokemon = p
+    return {
+        "name": tallest_pokemon["name"],
+        "weight": tallest_pokemon["weight"],
+        "height": tallest_pokemon["height"],
+    }
 
     url = template.format(id=5)
     r = requests.get(url)
