@@ -33,23 +33,23 @@ def get_some_details():
          dictionary, you'll need integer indeces for lists, and named keys for
          dictionaries.
     """
-    json_data = open(LOCAL + "/lazyduck.json").read()
+    # json_data = open(LOCAL + "/lazyduck.json").read()
 
-    with open(LOCAL + "/lazycduck.json", "r", encoding="utf-8") as f:
+    with open(LOCAL + "/lazyduck.json", "r", encoding="utf-8") as f:
         json_data = f.read()
     # json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
 
     last = data["results"][0]["name"]["last"]
-    password = data["results"][0]["Login"]["password"]
+    password = data["results"][0]["login"]["password"]
     postcode = data["results"][0]["location"]["postcode"]
     id = int(data["results"][0]["id"]["value"])
 
-    return {"lastName": last, "password": password, "postcpdePlusID": postcode + id}
+    return {"lastName": last, "password": password, "postcodePlusID": postcode + id}
 
-    data = json.loads(json_data)
-    return {"lastName": None, "password": None, "postcodePlusID": None}
+    # data = json.loads(json_data)
+    # return {"lastName": None, "password": None, "postcodePlusID": None}
 
 
 def wordy_pyramid():
@@ -91,7 +91,7 @@ def wordy_pyramid():
 
     # value at the end of URL determines the word lenfth - needs to be formatted to change its calue in the loop
 
-    for i in range(2, 21, 2):
+    for i in range(3, 21, 2):
         r = requests.get(url.format(i))
         first_half = r.text
         pyramid.append(first_half)
@@ -102,7 +102,7 @@ def wordy_pyramid():
         pyramid.append(second_half)
 
     return pyramid
-    pass
+    # pass
 
 
 def pokedex(low=1, high=5):
@@ -175,7 +175,7 @@ def diarist():
     laser.write(str(lasercount))
     laser.close()
 
-    pass
+    # pass
 
 
 if __name__ == "__main__":
@@ -189,5 +189,5 @@ if __name__ == "__main__":
             print(function())
         except Exception as e:
             print(e)
-    if not os.path.isfile("lasers.pew"):
+    if not os.path.isfile("set4\lasers.pew"):
         print("diarist did not create lasers.pew")
